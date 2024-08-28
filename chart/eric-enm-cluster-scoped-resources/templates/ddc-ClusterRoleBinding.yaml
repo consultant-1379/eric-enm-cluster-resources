@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: List
+metadata:
+  name: {{ template "eric-oss-ddc.cluster" . }}-cluster-role-list
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Namespace }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  name: {{ template "eric-oss-ddc.cluster" . }}
+  annotations:
+    meta.helm.sh/release-name: {{ template "eric-enm-cluster-resources.name" . }}-{{ .Release.Namespace }}
+    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+items:
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name:  {{ template "eric-oss-ddc.cluster" . }}-ClusterRoleBinding
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name:  {{ template  "monitoring-integration.Cluster" }}-ClusterRole
+    subjects:
+      - kind: ServiceAccount
+        name:  {{ template "eric-oss-ddc.cluster" . }}
+        namespace: {{ .Release.Namespace }}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: eric-enm-cluster-scoped-resources
+description: eric-enm-cluster-scoped-resources
+version: 1.0.0
+appVersion: '1.0'
+
